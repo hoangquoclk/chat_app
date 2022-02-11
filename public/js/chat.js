@@ -79,6 +79,18 @@ document.getElementById("send").addEventListener("click", () => {
   });
 });
 
+document.getElementById("chat").addEventListener("keyup", (event) => {
+  if (event.keyCode === 13) {
+    socket.emit("chat", document.getElementById("chat").value, (error) => {
+      if (error) {
+        return console.log(error);
+      }
+      document.getElementById("chat").value = "";
+      document.getElementById("chat").focus();
+    });
+  }
+});
+
 document.getElementById("location").addEventListener("click", () => {
   if (!navigator.geolocation) {
     return alert("Geolocation is not supported by your browser");
